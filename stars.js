@@ -13,6 +13,8 @@ const target_velocity = 12.0;
 const target_size = 10;
 const theta_step = 4.2;
 const error = 10;
+var ship_speed=0.0;
+var mouse_x = 300;
 
 class Star {
     constructor(){
@@ -83,6 +85,10 @@ class Target {
 function fill_background(){
     context.fillStyle = "black";
     context.fillRect(0, 0, canvas_size, canvas_size);
+    context.font = "60px Arial";
+    context.fillStyle = "white";
+    context.fillText("Hello " + name, 110, 50);
+
 }
 
 function draw_ship(x,y){
@@ -104,6 +110,8 @@ function draw_stars(star_i){
     for (var star of star_i){
         draw_star(star);
     };
+    ship_speed = -.05*(ship_x - mouse_x);
+    ship_x += ship_speed;
     draw_ship(ship_x, canvas_size -100);
 }
 
@@ -168,14 +176,15 @@ function keyRespond(evt){
 function check_target(){
     for (var bullet of bullet_i){
         if ((Math.abs(bullet.x - target.x - 40) < error) && (Math.abs(bullet.y - target.y - 40) < error)){
-            alert("You killed it!")
+            alert(name + ", you killed it!");
+            clearInterval(game);
         }
     }       
 }
 
 function mouseMove(evt){
     let rect = canvas.getBoundingClientRect();
-    ship_x = evt.clientX - rect.left
+    mouse_x = evt.clientX;
 }
 
 function mouseFire(evt){
@@ -185,14 +194,14 @@ function mouseFire(evt){
 function render(){
     draw_stars(star_i);
     draw_bullets(bullet_i);
-    draw_target();
+    draw_target();    
     update_stars(star_i);
     update_bullets(bullet_i);
     update_target();    
     check_target();
 }
 
-window.addEventListener('keydown', keyRespond);
+//window.addEventListener('keydown', keyRespond);
 canvas.addEventListener('mousemove', mouseMove);
 canvas.addEventListener('mousedown', mouseFire);
 
@@ -204,8 +213,14 @@ star_i = [];
 for (var i=0; i< num_stars; i++){
     star_i.push(new Star())
 };
+//let name = prompt('What is your name?');
+//var data = {
+//    player: name,
+//  }  
+//var jsonData = JSON.stringify(data);
 
-setInterval(render, 50);
+var game = setInterval(render, 50);
+
 
 
 

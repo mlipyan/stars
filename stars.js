@@ -168,7 +168,7 @@ function keyRespond(evt){
 function check_target(){
     for (var bullet of bullet_i){
         if ((Math.abs(bullet.x - target.x - 40) < error) && (Math.abs(bullet.y - target.y - 40) < error)){
-            alert("You killed it!")
+            alert(name + ", you killed it!")
         }
     }       
 }
@@ -204,6 +204,7 @@ star_i = [];
 for (var i=0; i< num_stars; i++){
     star_i.push(new Star())
 };
+let name = prompt('What is your name?');
 
 setInterval(render, 50);
 

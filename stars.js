@@ -217,7 +217,7 @@ let name = prompt('What is your name?');
 var data = {
     player: name,
   }  
-var jsonData = JSON.stringify(data);
+//var jsonData = JSON.stringify(data);
 
 var game = setInterval(render, 50);
 

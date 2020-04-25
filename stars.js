@@ -213,11 +213,11 @@ star_i = [];
 for (var i=0; i< num_stars; i++){
     star_i.push(new Star())
 };
-//let name = prompt('What is your name?');
-//var data = {
-//    player: name,
-//  }  
-//var jsonData = JSON.stringify(data);
+let name = prompt('What is your name?');
+var data = {
+    player: name,
+  }  
+var jsonData = JSON.stringify(data);
 
 var game = setInterval(render, 50);
 
